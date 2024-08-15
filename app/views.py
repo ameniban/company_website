@@ -1,19 +1,25 @@
-from os import name
 from django.shortcuts import render
-from django.http import HttpResponse
-from datetime import datetime
+from app.models import GeneralInfo
+
 
 # Create your views here.
 def index(request):
+
+    general_info = GeneralInfo.objects.first()
+    print(f'general info : {general_info.company_name}')
+
     context={
-        "name": "John Doe",
-        "age": 30,
-        "city": "New York",
-        "skills": ["Python", "Django", "JavaScript"],
-        "profile": {
-            "occupation": "Software Developer",
-            "experience": 5
-        },
-        "current_date": datetime.now()
+    "company_name":general_info.company_name,
+    "location" : general_info.location,
+    "email" : general_info.email,
+    "phone" : general_info.phone,
+    "open_hours" : general_info.open_hours,
+    "video_url" : general_info.video_url,
+    "twitter_url" : general_info.twitter_url,
+    "facebook_url" : general_info.facebook_url,
+    "instagram_url" : general_info.instagram_url,
+    "linkedin_url" : general_info.linkedin_url,
     }
+    print(f"context is : {context}")
+
     return render(request,"index.html" ,context)

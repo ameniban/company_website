@@ -4,4 +4,10 @@ from app.models import GeneralInfo
 
 @admin.register(GeneralInfo)
 class GeneralInfoAdmin(admin.ModelAdmin):
-    pass
+    list_display=[ #display these specefic col
+        'company_name',
+        'location', 'phone',
+        'open_hours'
+    ]
+    # set fiel to disable update :
+    readonly_fields = ['email']
